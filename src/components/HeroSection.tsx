@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import DialogCalculator from './DialogCalculator';
 
 const HeroSection = () => {
   return (
@@ -30,12 +31,7 @@ const HeroSection = () => {
                 Start 30-Day Free Trial
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button
-                variant="outline"
-                className="border-finance-200 text-finance-700 hover:bg-finance-50 px-6 py-6 rounded-xl text-lg"
-              >
-                View Live Demo
-              </Button>
+              <DialogCalculator />
             </div>
             
             <div className="mt-12">

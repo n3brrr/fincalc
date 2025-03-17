@@ -9,7 +9,12 @@ import {
   Shield, 
   Clock, 
   User, 
-  CreditCard
+  CreditCard,
+  Home,
+  DollarSign,
+  BriefcaseBusiness,
+  BanknoteIcon,
+  CoinsIcon
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -51,22 +56,40 @@ const features = [
     color: 'bg-red-100 text-red-700',
   },
   {
-    title: 'Time-saving Tools',
-    description: 'Reduce the time spent on financial calculations and planning by up to 80%.',
-    icon: Clock,
+    title: 'Loan Calculator',
+    description: 'Calculate monthly payments, interest costs, and amortization for any loan.',
+    icon: CreditCard,
     color: 'bg-emerald-100 text-emerald-700',
   },
   {
-    title: 'Personalized Insights',
-    description: 'Get tailored recommendations based on your unique financial situation.',
-    icon: User,
+    title: 'Mortgage Calculator',
+    description: 'Find out how much home you can afford and estimate your monthly payments.',
+    icon: Home,
     color: 'bg-indigo-100 text-indigo-700',
   },
   {
-    title: 'Expense Tracking',
-    description: 'Monitor your spending habits and identify opportunities to save.',
-    icon: CreditCard,
+    title: 'Tax Estimator',
+    description: 'Predict your tax liability and plan for refunds or payments.',
+    icon: BriefcaseBusiness,
     color: 'bg-rose-100 text-rose-700',
+  },
+  {
+    title: 'Net Worth Tracker',
+    description: 'Track all your assets and liabilities in one place to calculate your net worth.',
+    icon: DollarSign,
+    color: 'bg-violet-100 text-violet-700',
+  },
+  {
+    title: 'Debt Payoff Planner',
+    description: 'Create a strategy to eliminate debt quickly using snowball or avalanche methods.',
+    icon: CoinsIcon,
+    color: 'bg-orange-100 text-orange-700',
+  },
+  {
+    title: 'Income Calculator',
+    description: 'Calculate your take-home pay after taxes and deductions.',
+    icon: BanknoteIcon,
+    color: 'bg-teal-100 text-teal-700',
   },
 ];
 
