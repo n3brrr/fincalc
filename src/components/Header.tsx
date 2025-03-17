@@ -3,10 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue 
+} from '@/components/ui/select';
+import { Globe } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [language, setLanguage] = useState('en');
   
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +25,12 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  const handleLanguageChange = (value: string) => {
+    setLanguage(value);
+    // In a real app, you would implement language switching logic here
+    console.log(`Language changed to: ${value}`);
+  };
   
   return (
     <header 
@@ -49,6 +64,23 @@ const Header = () => {
             <Link to="/contact" className="text-sm font-medium text-foreground transition-colors hover:text-finance-600">
               Contact
             </Link>
+            
+            <div className="flex items-center border-l pl-6 border-gray-200">
+              <Globe className="h-4 w-4 text-gray-500 mr-2" />
+              <Select value={language} onValueChange={handleLanguageChange}>
+                <SelectTrigger className="w-[110px] border-none shadow-none focus:ring-0 h-8">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="es">Español</SelectItem>
+                  <SelectItem value="fr">Français</SelectItem>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="zh">中文</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
             <Button 
               className="bg-finance-600 hover:bg-finance-700 text-white"
             >
@@ -57,6 +89,21 @@ const Header = () => {
           </nav>
           
           <div className="md:hidden flex items-center">
+            <div className="mr-4">
+              <Select value={language} onValueChange={handleLanguageChange}>
+                <SelectTrigger className="w-[80px] border-none shadow-none h-8 p-0">
+                  <Globe className="h-4 w-4 text-gray-500 mr-1" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="es">Español</SelectItem>
+                  <SelectItem value="fr">Français</SelectItem>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="zh">中文</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
