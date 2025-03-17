@@ -4,8 +4,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import DialogCalculator from './DialogCalculator';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const HeroSection = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="relative overflow-hidden bg-white">
       <div className="absolute inset-0">
@@ -16,19 +19,18 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-finance-700 via-finance-600 to-finance-800 animate-fade-up">
-              Calculate Your Financial Future
+              {t('hero', 'title')}
             </h1>
             
             <p className="max-w-2xl mx-auto mt-6 text-xl text-gray-600 animate-fade-up" style={{animationDelay: '0.2s'}}>
-              Powerful tools to help you plan, save, and invest with confidence.
-              Take control of your financial journey today.
+              {t('hero', 'subtitle')}
             </p>
             
             <div className="mt-8 flex justify-center gap-4 animate-fade-up" style={{animationDelay: '0.3s'}}>
               <Button 
                 className="bg-finance-600 hover:bg-finance-700 text-white px-6 py-6 rounded-xl text-lg"
               >
-                Start 30-Day Free Trial
+                {t('hero', 'startTrial')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <DialogCalculator />
@@ -36,10 +38,14 @@ const HeroSection = () => {
             
             <div className="mt-12">
               <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-                {['No credit card required', 'Cancel anytime', '24/7 support'].map((item) => (
-                  <div key={item} className="flex items-center text-sm text-muted-foreground">
+                {[
+                  { key: 'noCreditCard' },
+                  { key: 'cancelAnytime' },
+                  { key: 'support' }
+                ].map((item) => (
+                  <div key={item.key} className="flex items-center text-sm text-muted-foreground">
                     <Check className="mr-2 h-4 w-4 text-finance-600" />
-                    {item}
+                    {t('hero', `features.${item.key}`)}
                   </div>
                 ))}
               </div>

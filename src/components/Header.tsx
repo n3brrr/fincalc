@@ -11,11 +11,12 @@ import {
   SelectValue 
 } from '@/components/ui/select';
 import { Globe } from 'lucide-react';
+import { useLanguage, Language } from '@/contexts/LanguageContext';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [language, setLanguage] = useState('en');
+  const { language, setLanguage, t } = useLanguage();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +28,7 @@ const Header = () => {
   }, []);
   
   const handleLanguageChange = (value: string) => {
-    setLanguage(value);
-    // In a real app, you would implement language switching logic here
+    setLanguage(value as Language);
     console.log(`Language changed to: ${value}`);
   };
   
@@ -53,16 +53,16 @@ const Header = () => {
           
           <nav className="hidden md:flex space-x-8 items-center">
             <Link to="/" className="text-sm font-medium text-foreground transition-colors hover:text-finance-600">
-              Home
+              {t('header', 'home')}
             </Link>
             <Link to="/features" className="text-sm font-medium text-foreground transition-colors hover:text-finance-600">
-              Features
+              {t('header', 'features')}
             </Link>
             <Link to="/pricing" className="text-sm font-medium text-foreground transition-colors hover:text-finance-600">
-              Pricing
+              {t('header', 'pricing')}
             </Link>
             <Link to="/contact" className="text-sm font-medium text-foreground transition-colors hover:text-finance-600">
-              Contact
+              {t('header', 'contact')}
             </Link>
             
             <div className="flex items-center border-l pl-6 border-gray-200">
@@ -84,7 +84,7 @@ const Header = () => {
             <Button 
               className="bg-finance-600 hover:bg-finance-700 text-white"
             >
-              Start Free Trial
+              {t('header', 'startFreeTrial')}
             </Button>
           </nav>
           
@@ -152,34 +152,34 @@ const Header = () => {
               className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-gray-50"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Home
+              {t('header', 'home')}
             </Link>
             <Link 
               to="/features" 
               className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-gray-50"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Features
+              {t('header', 'features')}
             </Link>
             <Link 
               to="/pricing" 
               className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-gray-50"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Pricing
+              {t('header', 'pricing')}
             </Link>
             <Link 
               to="/contact" 
               className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-gray-50"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Contact
+              {t('header', 'contact')}
             </Link>
             <Button 
               className="w-full mt-3 bg-finance-600 hover:bg-finance-700 text-white"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Start Free Trial
+              {t('header', 'startFreeTrial')}
             </Button>
           </div>
         </div>
