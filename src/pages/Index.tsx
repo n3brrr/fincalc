@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
@@ -42,12 +43,14 @@ const Index = () => {
             </div>
             
             <div className="mt-16 text-center">
-              <Button 
-                className="bg-finance-600 hover:bg-finance-700 text-white px-6 py-6 rounded-xl text-lg"
-              >
-                {t('hero', 'tryCalculators')}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/savings-calculator">
+                <Button 
+                  className="bg-finance-600 hover:bg-finance-700 text-white px-6 py-6 rounded-xl text-lg"
+                >
+                  {t('hero', 'tryCalculators')}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -65,6 +68,17 @@ const Index = () => {
             </div>
             
             <BudgetPlanner />
+            
+            <div className="mt-16 text-center">
+              <Link to="/budget-planner">
+                <Button 
+                  className="bg-finance-600 hover:bg-finance-700 text-white px-6 py-6 rounded-xl text-lg"
+                >
+                  {t('budget', 'tryBudgetPlanner') || 'Try Budget Planner'}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
         
@@ -85,12 +99,14 @@ const Index = () => {
                 {t('cta', 'subtitle')}
               </p>
               <div className="mt-8">
-                <Button 
-                  className="bg-white text-finance-600 hover:bg-finance-50 px-6 py-6 rounded-xl text-lg"
-                >
-                  {t('cta', 'button')}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <Link to="/pricing">
+                  <Button 
+                    className="bg-white text-finance-600 hover:bg-finance-50 px-6 py-6 rounded-xl text-lg"
+                  >
+                    {t('cta', 'button')}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
               </div>
               <p className="mt-4 text-sm text-finance-200">
                 {t('cta', 'noCreditCard')}
