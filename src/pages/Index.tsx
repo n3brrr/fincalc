@@ -10,8 +10,11 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import PricingSection from '@/components/PricingSection';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, MousePointerClick } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -24,10 +27,10 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Powerful Calculators at Your Fingertips
+                {t('calculators', 'title')}
               </h2>
               <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-                Our intuitive tools help you make smart financial decisions with ease
+                {t('calculators', 'subtitle')}
               </p>
               <div className="absolute right-24 top-28 hidden lg:block animate-float">
                 <MousePointerClick className="h-8 w-8 text-finance-500" />
@@ -42,7 +45,7 @@ const Index = () => {
               <Button 
                 className="bg-finance-600 hover:bg-finance-700 text-white px-6 py-6 rounded-xl text-lg"
               >
-                Try All Calculators
+                {t('hero', 'tryCalculators')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -54,10 +57,10 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Plan Your Budget
+                {t('budget', 'title')}
               </h2>
               <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-                Visualize your spending and find ways to save more each month
+                {t('budget', 'subtitle')}
               </p>
             </div>
             
@@ -76,21 +79,21 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-white sm:text-4xl">
-                Ready to transform your financial future?
+                {t('cta', 'title')}
               </h2>
               <p className="mt-4 max-w-2xl mx-auto text-xl text-finance-100">
-                Join thousands of users making smarter financial decisions every day.
+                {t('cta', 'subtitle')}
               </p>
               <div className="mt-8">
                 <Button 
                   className="bg-white text-finance-600 hover:bg-finance-50 px-6 py-6 rounded-xl text-lg"
                 >
-                  Start Your 30-Day Free Trial
+                  {t('cta', 'button')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
               <p className="mt-4 text-sm text-finance-200">
-                No credit card required. Cancel anytime.
+                {t('cta', 'noCreditCard')}
               </p>
             </div>
           </div>

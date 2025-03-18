@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,8 +6,35 @@ import { CheckIcon, XIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Language } from '@/contexts/LanguageContext';
 
-const tiers = [
+type TranslatedContent = {
+  [key in Language]: string;
+};
+
+interface TierFeature {
+  en: string[];
+  es: string[];
+  fr: string[];
+  de: string[];
+  zh: string[];
+}
+
+interface Tier {
+  name: TranslatedContent | string;
+  id: string;
+  price: {
+    monthly: number;
+    annually: number;
+  };
+  description: TranslatedContent | string;
+  features: TierFeature | string[];
+  notIncluded: TierFeature | string[];
+  popular: boolean;
+  buttonVariant: 'outline' | 'default';
+}
+
+const tiers: Tier[] = [
   {
     name: {
       en: 'Basic',
@@ -97,7 +125,7 @@ const tiers = [
       ],
     },
     popular: false,
-    buttonVariant: 'outline' as const,
+    buttonVariant: 'outline',
   },
   {
     name: 'Pro',
@@ -121,7 +149,7 @@ const tiers = [
       'Financial advisor access',
     ],
     popular: true,
-    buttonVariant: 'default' as const,
+    buttonVariant: 'default',
   },
   {
     name: 'Enterprise',
@@ -143,7 +171,7 @@ const tiers = [
     ],
     notIncluded: [],
     popular: false,
-    buttonVariant: 'outline' as const,
+    buttonVariant: 'outline',
   },
 ];
 
@@ -202,8 +230,16 @@ const PricingSection = () => {
             )}
             <div>
               <CardHeader className="pb-3">
-                <CardTitle className="text-xl">{tier.name[language as keyof typeof tier.name]}</CardTitle>
-                <CardDescription>{tier.description[language as keyof typeof tier.description]}</CardDescription>
+                <CardTitle className="text-xl">
+                  {typeof tier.name === 'object' && 'en' in tier.name 
+                    ? tier.name[language] || tier.name.en 
+                    : tier.name}
+                </CardTitle>
+                <CardDescription>
+                  {typeof tier.description === 'object' && 'en' in tier.description 
+                    ? tier.description[language] || tier.description.en 
+                    : tier.description}
+                </CardDescription>
               </CardHeader>
               <CardContent className="pb-6">
                 <div className="flex items-baseline mb-6">
@@ -215,13 +251,20 @@ const PricingSection = () => {
                   </span>
                 </div>
                 <ul className="space-y-2 text-sm">
-                  {tier.features[language as keyof typeof tier.features].map((feature) => (
+                  {/* Features list with proper type checking */}
+                  {(typeof tier.features === 'object' && 'en' in tier.features
+                    ? tier.features[language] || tier.features.en
+                    : tier.features).map((feature: string) => (
                     <li key={feature} className="flex items-center">
                       <CheckIcon className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
-                  {tier.notIncluded[language as keyof typeof tier.notIncluded].map((feature) => (
+                  
+                  {/* Not included features with proper type checking */}
+                  {(typeof tier.notIncluded === 'object' && 'en' in tier.notIncluded 
+                    ? tier.notIncluded[language] || tier.notIncluded.en
+                    : tier.notIncluded).map((feature: string) => (
                     <li key={feature} className="flex items-center text-muted-foreground">
                       <XIcon className="h-4 w-4 text-muted-foreground mr-2 flex-shrink-0" />
                       <span>{feature}</span>

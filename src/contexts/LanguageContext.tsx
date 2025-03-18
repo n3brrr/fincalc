@@ -4,10 +4,14 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 // Define available languages
 export type Language = 'en' | 'es' | 'fr' | 'de' | 'zh';
 
-// Define translations interface
+// Define translations interface for nested structure
+interface TranslationItem {
+  [key: string]: string | TranslationItem;
+}
+
 interface Translations {
   [key: string]: {
-    [key: string]: string;
+    [key: string]: string | TranslationItem;
   };
 }
 
@@ -232,6 +236,23 @@ const translations: Translations = {
   },
 };
 
+// Helper function to get nested values
+const getNestedValue = (obj: any, path: string[], language: Language): string => {
+  let current = obj;
+  for (let i = 0; i < path.length; i++) {
+    if (current[path[i]] === undefined) {
+      return `[${path.join('.')}]`;
+    }
+    current = current[path[i]];
+  }
+  
+  if (typeof current === 'object' && current[language]) {
+    return current[language];
+  }
+  
+  return `[${path.join('.')}]`;
+};
+
 // Define the context type
 interface LanguageContextType {
   language: Language;
@@ -252,8 +273,15 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   // Translation function
   const t = (section: string, key: string): string => {
-    if (translations[section] && translations[section][key] && translations[section][key][language]) {
-      return translations[section][key][language];
+    const parts = key.split('.');
+    if (translations[section]) {
+      if (parts.length > 1) {
+        // Handle nested keys (e.g., "features.noCreditCard")
+        return getNestedValue(translations[section], parts, language);
+      } else if (translations[section][key]) {
+        // Handle flat keys
+        return getNestedValue(translations[section], [key], language);
+      }
     }
     return `[${section}.${key}]`;
   };
