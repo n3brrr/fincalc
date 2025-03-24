@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 // Define available languages
@@ -224,7 +223,7 @@ const translations: Translations = {
       es: 'Más Popular',
       fr: 'Le Plus Populaire',
       de: 'Am beliebtesten',
-      zh: '最受欢迎',
+      zh: '最受���迎',
     },
     taxNote: {
       en: 'All prices are in USD and exclude applicable taxes',
@@ -232,6 +231,122 @@ const translations: Translations = {
       fr: 'Tous les prix sont en USD et hors taxes applicables',
       de: 'Alle Preise sind in USD und verstehen sich zuzüglich der geltenden Steuern',
       zh: '所有价格均以美元计算，不包含适用税费',
+    },
+  },
+  blog: {
+    title: {
+      en: 'Financial Blog',
+      es: 'Blog Financiero',
+      fr: 'Blog Financier',
+      de: 'Finanzblog',
+      zh: '财经博客',
+    },
+    subtitle: {
+      en: 'Stay updated with the latest financial news and insights',
+      es: 'Mantente actualizado con las últimas noticias e ideas financieras',
+      fr: 'Restez à jour avec les dernières nouvelles et perspectives financières',
+      de: 'Bleiben Sie mit den neuesten Finanznachrichten und Einblicken auf dem Laufenden',
+      zh: '获取最新的财经新闻和见解',
+    },
+    readMore: {
+      en: 'Read More',
+      es: 'Leer Más',
+      fr: 'Lire Plus',
+      de: 'Mehr Lesen',
+      zh: '阅读更多',
+    },
+    loading: {
+      en: 'Loading articles...',
+      es: 'Cargando artículos...',
+      fr: 'Chargement des articles...',
+      de: 'Artikel werden geladen...',
+      zh: '正在加载文章...',
+    },
+    error: {
+      en: 'Failed to load articles. Please try again later.',
+      es: 'Error al cargar artículos. Por favor, inténtelo de nuevo más tarde.',
+      fr: 'Échec du chargement des articles. Veuillez réessayer plus tard.',
+      de: 'Fehler beim Laden der Artikel. Bitte versuchen Sie es später erneut.',
+      zh: '加载文章失败。请稍后再试。',
+    },
+  },
+  auth: {
+    signIn: {
+      en: 'Sign In',
+      es: 'Iniciar Sesión',
+      fr: 'Se Connecter',
+      de: 'Anmelden',
+      zh: '登录',
+    },
+    signUp: {
+      en: 'Sign Up',
+      es: 'Registrarse',
+      fr: 'S\'inscrire',
+      de: 'Registrieren',
+      zh: '注册',
+    },
+    email: {
+      en: 'Email',
+      es: 'Correo Electrónico',
+      fr: 'Email',
+      de: 'Email',
+      zh: '电子邮件',
+    },
+    password: {
+      en: 'Password',
+      es: 'Contraseña',
+      fr: 'Mot de passe',
+      de: 'Passwort',
+      zh: '密码',
+    },
+    forgotPassword: {
+      en: 'Forgot Password?',
+      es: '¿Olvidó su Contraseña?',
+      fr: 'Mot de passe oublié?',
+      de: 'Passwort vergessen?',
+      zh: '忘记密码？',
+    },
+    noAccount: {
+      en: 'Don\'t have an account?',
+      es: '¿No tiene una cuenta?',
+      fr: 'Vous n\'avez pas de compte?',
+      de: 'Sie haben noch kein Konto?',
+      zh: '没有账户？',
+    },
+    haveAccount: {
+      en: 'Already have an account?',
+      es: '¿Ya tiene una cuenta?',
+      fr: 'Vous avez déjà un compte?',
+      de: 'Sie haben bereits ein Konto?',
+      zh: '已有账户？',
+    },
+    signInButton: {
+      en: 'Sign In',
+      es: 'Iniciar Sesión',
+      fr: 'Se Connecter',
+      de: 'Anmelden',
+      zh: '登录',
+    },
+    signUpButton: {
+      en: 'Sign Up',
+      es: 'Registrarse',
+      fr: 'S\'inscrire',
+      de: 'Registrieren',
+      zh: '注册',
+    },
+    signInTitle: {
+      en: 'Welcome Back',
+      es: 'Bienvenido de Nuevo',
+      fr: 'Bienvenue',
+      de: 'Willkommen zurück',
+      zh: '欢迎回来',
+    },
+    signUpTitle: {
+      en: 'Create an Account',
+      es: 'Crear una Cuenta',
+      fr: 'Créer un Compte',
+      de: 'Konto erstellen',
+      zh: '创建账户',
     },
   },
 };

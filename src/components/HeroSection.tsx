@@ -5,6 +5,7 @@ import { ArrowRight, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import DialogCalculator from './DialogCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -27,12 +28,14 @@ const HeroSection = () => {
             </p>
             
             <div className="mt-8 flex justify-center gap-4 animate-fade-up" style={{animationDelay: '0.3s'}}>
-              <Button 
-                className="bg-finance-600 hover:bg-finance-700 text-white px-6 py-6 rounded-xl text-lg"
-              >
-                {t('hero', 'startTrial')}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/auth">
+                <Button 
+                  className="bg-finance-600 hover:bg-finance-700 text-white px-6 py-6 rounded-xl text-lg"
+                >
+                  {t('hero', 'startTrial')}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
               <DialogCalculator />
             </div>
             
