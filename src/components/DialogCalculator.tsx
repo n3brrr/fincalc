@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -130,6 +129,8 @@ const DialogCalculator = () => {
                     type="number" 
                     value={loanAmount}
                     onChange={(e) => setLoanAmount(Number(e.target.value))}
+                    min={1000}
+                    max={1000000}
                   />
                 </div>
                 <div className="space-y-2">
@@ -140,6 +141,8 @@ const DialogCalculator = () => {
                     step="0.1"
                     value={loanInterest}
                     onChange={(e) => setLoanInterest(Number(e.target.value))}
+                    min={0.1}
+                    max={30}
                   />
                 </div>
                 <div className="space-y-2">
@@ -149,6 +152,8 @@ const DialogCalculator = () => {
                     type="number" 
                     value={loanTerm}
                     onChange={(e) => setLoanTerm(Number(e.target.value))}
+                    min={1}
+                    max={50}
                   />
                 </div>
               </CardContent>
@@ -184,6 +189,8 @@ const DialogCalculator = () => {
                     type="number" 
                     value={homePrice}
                     onChange={(e) => setHomePrice(Number(e.target.value))}
+                    min={50000}
+                    max={2000000}
                   />
                 </div>
                 <div className="space-y-2">
@@ -193,6 +200,8 @@ const DialogCalculator = () => {
                     type="number" 
                     value={downPayment}
                     onChange={(e) => setDownPayment(Number(e.target.value))}
+                    min={0}
+                    max={500000}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -249,6 +258,8 @@ const DialogCalculator = () => {
                     type="number" 
                     value={creditBalance}
                     onChange={(e) => setCreditBalance(Number(e.target.value))}
+                    min={100}
+                    max={100000}
                   />
                 </div>
                 <div className="space-y-2">
@@ -259,6 +270,8 @@ const DialogCalculator = () => {
                     step="0.1"
                     value={creditAPR}
                     onChange={(e) => setCreditAPR(Number(e.target.value))}
+                    min={0.1}
+                    max={35}
                   />
                 </div>
                 <div className="space-y-2">
@@ -268,6 +281,8 @@ const DialogCalculator = () => {
                     type="number" 
                     value={monthlyPayment}
                     onChange={(e) => setMonthlyPayment(Number(e.target.value))}
+                    min={10}
+                    max={10000}
                   />
                 </div>
               </CardContent>

@@ -153,8 +153,8 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[initialAmount]} 
                   min={0} 
-                  max={10000} 
-                  step={100}
+                  max={100000} 
+                  step={1000}
                   onValueChange={(value) => setInitialAmount(value[0])}
                   className="flex-grow"
                 />
@@ -178,8 +178,8 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[monthlyContribution]} 
                   min={0} 
-                  max={2000} 
-                  step={50}
+                  max={10000} 
+                  step={100}
                   onValueChange={(value) => setMonthlyContribution(value[0])}
                   className="flex-grow"
                 />
@@ -203,7 +203,7 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[interestRate]} 
                   min={0.1} 
-                  max={12} 
+                  max={25} 
                   step={0.1}
                   onValueChange={(value) => setInterestRate(value[0])}
                   className="flex-grow"
@@ -229,7 +229,7 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[years]} 
                   min={1} 
-                  max={40} 
+                  max={50} 
                   step={1}
                   onValueChange={(value) => setYears(value[0])}
                   className="flex-grow"
@@ -256,8 +256,8 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[initialAmount]} 
                   min={0} 
-                  max={50000} 
-                  step={1000}
+                  max={500000} 
+                  step={5000}
                   onValueChange={(value) => setInitialAmount(value[0])}
                   className="flex-grow"
                 />
@@ -281,8 +281,8 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[monthlyContribution]} 
                   min={0} 
-                  max={5000} 
-                  step={100}
+                  max={20000} 
+                  step={500}
                   onValueChange={(value) => setMonthlyContribution(value[0])}
                   className="flex-grow"
                 />
@@ -306,7 +306,7 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[interestRate]} 
                   min={1} 
-                  max={20} 
+                  max={30} 
                   step={0.5}
                   onValueChange={(value) => setInterestRate(value[0])}
                   className="flex-grow"
@@ -332,7 +332,7 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[years]} 
                   min={1} 
-                  max={40} 
+                  max={50} 
                   step={1}
                   onValueChange={(value) => setYears(value[0])}
                   className="flex-grow"
@@ -359,8 +359,8 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[initialAmount]} 
                   min={1000} 
-                  max={20000} 
-                  step={500}
+                  max={50000} 
+                  step={1000}
                   onValueChange={(value) => setInitialAmount(value[0])}
                   className="flex-grow"
                 />
@@ -384,8 +384,8 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[monthlyContribution]} 
                   min={0} 
-                  max={100} 
-                  step={1}
+                  max={1000} 
+                  step={10}
                   onValueChange={(value) => setMonthlyContribution(value[0])}
                   className="flex-grow"
                 />
@@ -409,7 +409,7 @@ const SavingsCalculator = ({
                 <Slider 
                   value={[interestRate]} 
                   min={1} 
-                  max={15} 
+                  max={25} 
                   step={0.5}
                   onValueChange={(value) => setInterestRate(value[0])}
                   className="flex-grow"

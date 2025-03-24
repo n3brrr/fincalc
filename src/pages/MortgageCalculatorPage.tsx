@@ -26,7 +26,7 @@ const MortgageCalculatorPage = () => {
     const x = Math.pow(1 + interest, payments);
     const monthly = (principal * x * interest) / (x - 1);
     
-    setMortgagePayment(parseFloat(monthly.toFixed(2)));
+    setMortgagePayment(isNaN(monthly) ? null : parseFloat(monthly.toFixed(2)));
   };
   
   return (
@@ -62,6 +62,8 @@ const MortgageCalculatorPage = () => {
                       type="number" 
                       value={homePrice}
                       onChange={(e) => setHomePrice(Number(e.target.value))}
+                      min={50000}
+                      max={2000000}
                     />
                   </div>
                   <div className="space-y-2">
@@ -71,6 +73,8 @@ const MortgageCalculatorPage = () => {
                       type="number" 
                       value={downPayment}
                       onChange={(e) => setDownPayment(Number(e.target.value))}
+                      min={0}
+                      max={500000}
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -82,6 +86,8 @@ const MortgageCalculatorPage = () => {
                         step="0.1"
                         value={mortgageRate}
                         onChange={(e) => setMortgageRate(Number(e.target.value))}
+                        min={0.1}
+                        max={20}
                       />
                     </div>
                     <div className="space-y-2">
@@ -91,6 +97,8 @@ const MortgageCalculatorPage = () => {
                         type="number" 
                         value={mortgageTerm}
                         onChange={(e) => setMortgageTerm(Number(e.target.value))}
+                        min={1}
+                        max={50}
                       />
                     </div>
                   </div>

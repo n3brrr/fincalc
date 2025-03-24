@@ -146,6 +146,8 @@ Recommendation: ${recommendation()}
                 value={income}
                 onChange={(e) => setIncome(Number(e.target.value))}
                 className="border-finance-200 focus:border-finance-400"
+                min={1000}
+                max={100000}
               />
             </div>
             
@@ -168,6 +170,8 @@ Recommendation: ${recommendation()}
                       )
                     }
                     className="border-finance-200 focus:border-finance-400"
+                    min={0}
+                    max={50000}
                   />
                 </div>
               ))}

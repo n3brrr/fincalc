@@ -25,7 +25,7 @@ const LoanCalculatorPage = () => {
     const x = Math.pow(1 + interest, payments);
     const monthly = (principal * x * interest) / (x - 1);
     
-    setLoanPayment(parseFloat(monthly.toFixed(2)));
+    setLoanPayment(isNaN(monthly) ? null : parseFloat(monthly.toFixed(2)));
   };
   
   return (
@@ -61,6 +61,8 @@ const LoanCalculatorPage = () => {
                       type="number" 
                       value={loanAmount}
                       onChange={(e) => setLoanAmount(Number(e.target.value))}
+                      min={1000}
+                      max={1000000}
                     />
                   </div>
                   <div className="space-y-2">
@@ -71,6 +73,8 @@ const LoanCalculatorPage = () => {
                       step="0.1"
                       value={loanInterest}
                       onChange={(e) => setLoanInterest(Number(e.target.value))}
+                      min={0.1}
+                      max={30}
                     />
                   </div>
                   <div className="space-y-2">
@@ -80,6 +84,8 @@ const LoanCalculatorPage = () => {
                       type="number" 
                       value={loanTerm}
                       onChange={(e) => setLoanTerm(Number(e.target.value))}
+                      min={1}
+                      max={50}
                     />
                   </div>
                 </CardContent>

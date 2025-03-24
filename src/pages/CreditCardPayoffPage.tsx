@@ -78,6 +78,8 @@ const CreditCardPayoffPage = () => {
                       type="number" 
                       value={creditBalance}
                       onChange={(e) => setCreditBalance(Number(e.target.value))}
+                      min={100}
+                      max={100000}
                     />
                   </div>
                   <div className="space-y-2">
@@ -88,6 +90,8 @@ const CreditCardPayoffPage = () => {
                       step="0.1"
                       value={creditAPR}
                       onChange={(e) => setCreditAPR(Number(e.target.value))}
+                      min={0.1}
+                      max={35}
                     />
                   </div>
                   <div className="space-y-2">
@@ -97,6 +101,8 @@ const CreditCardPayoffPage = () => {
                       type="number" 
                       value={monthlyPayment}
                       onChange={(e) => setMonthlyPayment(Number(e.target.value))}
+                      min={10}
+                      max={10000}
                     />
                   </div>
                 </CardContent>
