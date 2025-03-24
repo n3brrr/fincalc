@@ -27,6 +27,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // If Supabase is not initialized (missing credentials), use mock implementation
+    if (!supabase) {
+      console.log('Using mock authentication implementation');
+      setLoading(false);
+      return () => {};
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -44,11 +51,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
 
     return () => {
-      subscription.unsubscribe();
+      if (subscription) subscription.unsubscribe();
     };
   }, []);
 
   const signUp = async (email: string, password: string) => {
+    if (!supabase) {
+      console.log('Mock sign up:', email);
+      // Simulate successful sign up
+      return;
+    }
+    
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -58,6 +71,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const signIn = async (email: string, password: string) => {
+    if (!supabase) {
+      console.log('Mock sign in:', email);
+      // Simulate successful sign in with mock user
+      const mockUser = {
+        id: 'mock-user-id',
+        email,
+        created_at: new Date().toISOString(),
+      } as User;
+      
+      setUser(mockUser);
+      return;
+    }
+    
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -67,6 +93,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const signOut = async () => {
+    if (!supabase) {
+      console.log('Mock sign out');
+      setUser(null);
+      return;
+    }
+    
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   };

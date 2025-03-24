@@ -15,8 +15,23 @@ import AuthPage from '@/pages/AuthPage';
 import './App.css';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
+import { Toaster } from '@/components/ui/toaster';
+import { useEffect } from 'react';
+import { toast } from '@/components/ui/use-toast';
+import { supabase } from './lib/supabase';
 
 function App() {
+  useEffect(() => {
+    // Show toast message if Supabase credentials are missing
+    if (!supabase) {
+      toast({
+        title: "Development Mode",
+        description: "Supabase credentials are missing. Authentication features will be simulated.",
+        duration: 5000,
+      });
+    }
+  }, []);
+
   return (
     <LanguageProvider>
       <AuthProvider>
@@ -34,6 +49,7 @@ function App() {
           <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Toaster />
       </AuthProvider>
     </LanguageProvider>
   );
