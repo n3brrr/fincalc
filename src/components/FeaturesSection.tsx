@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Calculator, 
   PiggyBank, 
@@ -24,72 +25,84 @@ const features = [
     description: 'Plan your savings strategy with our powerful compound interest calculator.',
     icon: PiggyBank,
     color: 'bg-blue-100 text-blue-700',
+    path: '/savings-calculator'
   },
   {
     title: 'Investment Projections',
     description: 'Visualize potential investment growth based on different strategies.',
     icon: LineChart,
     color: 'bg-green-100 text-green-700',
+    path: '/savings-calculator'
   },
   {
     title: 'Retirement Planning',
     description: 'Calculate how much you need to save for a comfortable retirement.',
     icon: BarChart3,
     color: 'bg-purple-100 text-purple-700',
+    path: '/savings-calculator'
   },
   {
     title: 'Budget Optimizer',
     description: 'Find the optimal allocation of your income across various expense categories.',
     icon: Calculator,
     color: 'bg-amber-100 text-amber-700',
+    path: '/budget-planner'
   },
   {
     title: 'Real-time Updates',
     description: 'See how market changes affect your financial plans with instant recalculations.',
     icon: RefreshCw,
     color: 'bg-sky-100 text-sky-700',
+    path: '/savings-calculator'
   },
   {
     title: 'Secure Data',
     description: 'Your financial information is always protected with enterprise-grade security.',
     icon: Shield,
     color: 'bg-red-100 text-red-700',
+    path: '/features'
   },
   {
     title: 'Loan Calculator',
     description: 'Calculate monthly payments, interest costs, and amortization for any loan.',
     icon: CreditCard,
     color: 'bg-emerald-100 text-emerald-700',
+    path: '/loan-calculator'
   },
   {
     title: 'Mortgage Calculator',
     description: 'Find out how much home you can afford and estimate your monthly payments.',
     icon: Home,
     color: 'bg-indigo-100 text-indigo-700',
+    path: '/mortgage-calculator'
   },
   {
     title: 'Tax Estimator',
     description: 'Predict your tax liability and plan for refunds or payments.',
     icon: BriefcaseBusiness,
     color: 'bg-rose-100 text-rose-700',
+    path: '/budget-planner'
   },
   {
     title: 'Net Worth Tracker',
     description: 'Track all your assets and liabilities in one place to calculate your net worth.',
     icon: DollarSign,
     color: 'bg-violet-100 text-violet-700',
+    path: '/budget-planner'
   },
   {
     title: 'Debt Payoff Planner',
     description: 'Create a strategy to eliminate debt quickly using snowball or avalanche methods.',
     icon: CoinsIcon,
     color: 'bg-orange-100 text-orange-700',
+    path: '/credit-card-payoff'
   },
   {
     title: 'Income Calculator',
     description: 'Calculate your take-home pay after taxes and deductions.',
     icon: BanknoteIcon,
     color: 'bg-teal-100 text-teal-700',
+    path: '/budget-planner'
   },
 ];
 
@@ -109,7 +122,7 @@ const FeaturesSection = () => {
         <div className="mt-20">
           <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
             {features.map((feature) => (
-              <div key={feature.title} className="group relative">
+              <Link to={feature.path} key={feature.title} className="group relative">
                 <div className={cn(
                   "absolute flex h-14 w-14 items-center justify-center rounded-xl",
                   feature.color
@@ -124,7 +137,7 @@ const FeaturesSection = () => {
                     {feature.description}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
