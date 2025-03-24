@@ -66,8 +66,8 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Navigation for desktop */}
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Navigation for desktop - centered */}
+          <nav className="hidden md:flex items-center mx-auto absolute left-1/2 transform -translate-x-1/2">
             {navigationItems.map((item) => (
               <Link
                 key={item.path}

@@ -17,6 +17,7 @@ const CreditCardPayoffPage = () => {
   const [monthlyPayment, setMonthlyPayment] = useState<number>(200);
   const [payoffTime, setPayoffTime] = useState<number | null>(null);
   const [totalInterest, setTotalInterest] = useState<number | null>(null);
+  const [totalPaid, setTotalPaid] = useState<number | null>(null);
 
   const calculateCreditPayoff = () => {
     const balance = creditBalance;
@@ -43,6 +44,7 @@ const CreditCardPayoffPage = () => {
     
     setPayoffTime(months);
     setTotalInterest(parseFloat(interestPaid.toFixed(2)));
+    setTotalPaid(parseFloat((creditBalance + interestPaid).toFixed(2)));
   };
   
   return (
@@ -123,6 +125,19 @@ const CreditCardPayoffPage = () => {
                         <p className="text-sm text-finance-700 mb-1">Total Interest</p>
                         <p className="text-2xl font-bold text-finance-800">${totalInterest.toLocaleString()}</p>
                       </div>
+                      
+                      {totalPaid !== null && (
+                        <div className="col-span-2 mt-3 pt-3 border-t border-finance-100 grid grid-cols-2 gap-2 text-xs">
+                          <div>
+                            <p className="text-gray-500">Total Investment</p>
+                            <p className="font-semibold">${creditBalance.toLocaleString()}</p>
+                          </div>
+                          <div>
+                            <p className="text-gray-500">Total Interest</p>
+                            <p className="font-semibold text-green-600">+${totalInterest.toLocaleString()}</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </CardFooter>

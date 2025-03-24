@@ -16,6 +16,8 @@ const LoanCalculatorPage = () => {
   const [loanInterest, setLoanInterest] = useState<number>(5);
   const [loanTerm, setLoanTerm] = useState<number>(3);
   const [loanPayment, setLoanPayment] = useState<number | null>(null);
+  const [totalPaid, setTotalPaid] = useState<number | null>(null);
+  const [totalInterest, setTotalInterest] = useState<number | null>(null);
 
   const calculateLoanPayment = () => {
     const principal = loanAmount;
@@ -25,7 +27,14 @@ const LoanCalculatorPage = () => {
     const x = Math.pow(1 + interest, payments);
     const monthly = (principal * x * interest) / (x - 1);
     
-    setLoanPayment(isNaN(monthly) ? null : parseFloat(monthly.toFixed(2)));
+    const calculatedMonthly = isNaN(monthly) ? null : parseFloat(monthly.toFixed(2));
+    setLoanPayment(calculatedMonthly);
+    
+    if (calculatedMonthly) {
+      const calculatedTotalPaid = calculatedMonthly * payments;
+      setTotalPaid(parseFloat(calculatedTotalPaid.toFixed(2)));
+      setTotalInterest(parseFloat((calculatedTotalPaid - principal).toFixed(2)));
+    }
   };
   
   return (
@@ -100,6 +109,19 @@ const LoanCalculatorPage = () => {
                     <div className="p-4 rounded-md bg-finance-50 text-center">
                       <p className="text-sm text-finance-700 mb-1">Your Monthly Payment</p>
                       <p className="text-2xl font-bold text-finance-800">${loanPayment.toLocaleString()}</p>
+                      
+                      {totalPaid !== null && totalInterest !== null && (
+                        <div className="mt-3 pt-3 border-t border-finance-100 grid grid-cols-2 gap-2 text-xs">
+                          <div>
+                            <p className="text-gray-500">Total Investment</p>
+                            <p className="font-semibold">${loanAmount.toLocaleString()}</p>
+                          </div>
+                          <div>
+                            <p className="text-gray-500">Total Interest</p>
+                            <p className="font-semibold text-green-600">+${totalInterest.toLocaleString()}</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </CardFooter>
