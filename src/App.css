@@ -57,4 +57,29 @@
   h2 {
     font-size: 1.5rem;
   }
+  
+  /* Fix mobile buttons */
+  .flex-col.md\:flex-row button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  /* Fix header button alignment */
+  header .flex.items-center > button,
+  header .flex.items-center > a > button {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  /* Stack buttons on mobile */
+  .md\:flex.items-center.space-x-2 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  /* Fix space between buttons on mobile */
+  .md\:flex.items-center.space-x-2 > * {
+    margin-left: 0 !important;
+  }
 }

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { useToast } from '@/components/ui/use-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useAuth } from '@/contexts/AuthContext';
+import { Check, X } from 'lucide-react';
 
 const AuthPage = () => {
   const { t } = useLanguage();
@@ -20,11 +21,38 @@ const AuthPage = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordErrors, setPasswordErrors] = useState({
+    length: false,
+    hasNumber: false,
+    hasSpecial: false,
+    hasUppercase: false
+  });
+
+  // Validate password as user types
+  useEffect(() => {
+    if (!isSignIn) {
+      setPasswordErrors({
+        length: password.length >= 8,
+        hasNumber: /\d/.test(password),
+        hasSpecial: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+        hasUppercase: /[A-Z]/.test(password)
+      });
+    }
+  }, [password, isSignIn]);
 
   // If user is already authenticated, redirect to home
   if (user) {
     return <Navigate to="/" />;
   }
+
+  const validatePassword = () => {
+    return (
+      passwordErrors.length &&
+      passwordErrors.hasNumber &&
+      passwordErrors.hasSpecial &&
+      passwordErrors.hasUppercase
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +66,16 @@ const AuthPage = () => {
         });
         navigate('/');
       } else {
+        // Validate password for sign up
+        if (!validatePassword()) {
+          toast({
+            variant: 'destructive',
+            title: 'Invalid Password',
+            description: 'Please ensure your password meets all requirements',
+          });
+          return;
+        }
+        
         await signUp(email, password);
         toast({
           title: 'Success',
@@ -64,22 +102,16 @@ const AuthPage = () => {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {isSignIn 
-                    ? t('auth', 'signInTitle') 
-                    : t('auth', 'signUpTitle')}
+                  {isSignIn ? 'Sign In' : 'Create Account'}
                 </CardTitle>
                 <CardDescription>
-                  {isSignIn 
-                    ? t('auth', 'noAccount') 
-                    : t('auth', 'haveAccount')}
+                  {isSignIn ? "Don't have an account?" : "Already have an account?"}
                   {' '}
                   <button 
                     onClick={() => setIsSignIn(!isSignIn)}
                     className="text-finance-600 hover:underline"
                   >
-                    {isSignIn 
-                      ? t('auth', 'signUp') 
-                      : t('auth', 'signIn')}
+                    {isSignIn ? 'Sign Up' : 'Sign In'}
                   </button>
                 </CardDescription>
               </CardHeader>
@@ -87,7 +119,7 @@ const AuthPage = () => {
               <form onSubmit={handleSubmit}>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">{t('auth', 'email')}</Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input 
                       id="email" 
                       type="email" 
@@ -99,13 +131,13 @@ const AuthPage = () => {
                   
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="password">{t('auth', 'password')}</Label>
+                      <Label htmlFor="password">Password</Label>
                       {isSignIn && (
                         <button 
                           type="button"
                           className="text-sm text-finance-600 hover:underline"
                         >
-                          {t('auth', 'forgotPassword')}
+                          Forgot Password?
                         </button>
                       )}
                     </div>
@@ -117,17 +149,48 @@ const AuthPage = () => {
                       required
                     />
                   </div>
+
+                  {/* Password requirements for sign up */}
+                  {!isSignIn && (
+                    <div className="bg-gray-50 p-3 rounded border border-gray-200">
+                      <p className="text-sm font-medium mb-2">Password must have:</p>
+                      <ul className="space-y-1 text-sm">
+                        <li className="flex items-center gap-2">
+                          {passwordErrors.length 
+                            ? <Check className="h-4 w-4 text-green-500" /> 
+                            : <X className="h-4 w-4 text-red-500" />}
+                          At least 8 characters
+                        </li>
+                        <li className="flex items-center gap-2">
+                          {passwordErrors.hasUppercase 
+                            ? <Check className="h-4 w-4 text-green-500" /> 
+                            : <X className="h-4 w-4 text-red-500" />}
+                          At least one uppercase letter
+                        </li>
+                        <li className="flex items-center gap-2">
+                          {passwordErrors.hasNumber 
+                            ? <Check className="h-4 w-4 text-green-500" /> 
+                            : <X className="h-4 w-4 text-red-500" />}
+                          At least one number
+                        </li>
+                        <li className="flex items-center gap-2">
+                          {passwordErrors.hasSpecial 
+                            ? <Check className="h-4 w-4 text-green-500" /> 
+                            : <X className="h-4 w-4 text-red-500" />}
+                          At least one special character
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </CardContent>
                 
                 <CardFooter>
                   <Button 
                     type="submit" 
                     className="w-full bg-finance-600 hover:bg-finance-700"
-                    disabled={loading}
+                    disabled={loading || (!isSignIn && !validatePassword())}
                   >
-                    {isSignIn 
-                      ? t('auth', 'signInButton') 
-                      : t('auth', 'signUpButton')}
+                    {isSignIn ? 'Sign In' : 'Create Account'}
                   </Button>
                 </CardFooter>
               </form>
